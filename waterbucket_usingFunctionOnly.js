@@ -3,6 +3,7 @@ var queue = [];
 var seen = {};
 //#####################################
 function addState(parentstate,newstate) {
+  //add state if it's new. Remember its parent
   if (String(newstate) in seen)
     return;
   seen[String(newstate)] = String(parentstate);
@@ -10,6 +11,7 @@ function addState(parentstate,newstate) {
 }    
 
 function getState() {
+  //return next state and pop it off the queue
   if ( ! queue.length)
     return;
   state = queue[0];
@@ -18,6 +20,7 @@ function getState() {
 }
 
 function getSolution() {
+  //Return solution from latest state added
   solution = [];
   state = (queue.slice(-1)[0]);
   while (state) {
@@ -29,6 +32,7 @@ function getSolution() {
 }
 
 function getParent(childState) {
+  //return parent of state, if it exists
   try {
     return seen[String(childState)];
   }
@@ -39,12 +43,14 @@ function getParent(childState) {
 //##########################################
   
 function test(oldstate,newstate) {
+  //to check whether we reached the goal
   [newA , newB] = newstate;
   won = (newA == target || newB == target);
   addState(oldstate,newstate);
   return won;
 }
 function playGame( aMax, bMax ,goal) {
+  //grab a state and generate 8 more to submit to the manager
   target = goal;
   addState("" , [0,0]);
   while (true) {
