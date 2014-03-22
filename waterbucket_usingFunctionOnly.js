@@ -1,7 +1,8 @@
 var targrt ;
 var queue = [];
 var seen = {};
-//#####################################
+//#########################################
+
 function addState(parentstate,newstate) {
   //add state if it's new. Remember its parent
   if (String(newstate) in seen)
